@@ -2,9 +2,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
 
+
 const sendDataToEndpoint = async (data) => {
+      let endpoint= 'https://requestbin.com/';
+      console.log("datas",data);
   try {
-    const response = await fetch('https://requestbin.com/', {
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -16,40 +19,39 @@ const sendDataToEndpoint = async (data) => {
       return true;
     } else {
       console.log('Server error:', response.status);
-      Alert.alert('Server error:', 'Network Request Failed ')
+      Alert.alert('Server error:', 'Network request failed');
       return false;
     }
   } catch (error) {
     console.log('Data transmission failed:', error);
-    Alert.alert('Data transmission failed:', error)
+    Alert.alert('Data transmission failed:', error.message);
     return false;
   }
-
 };
+
 const webServiceHandler = async (data) => {
   try {
-   
     const sessionFlag = await AsyncStorage.getItem('sessionFlag');
     if (sessionFlag) {
-      console.log('====================================');
-      console.log(sessionFlag);
-      console.log('====================================');
-      Alert.alert('Data Already Store', 'Data Already Collected This Session')
-      return { success: false, message: 'Data already collected this session'};
+      console.log('Data already collected this session');
+      Alert.alert('Data Already Collected', 'Data already collected this session');
+      return { success: false, message: 'Data already collected this session' };
     }
 
-   
     if (!data) {
-      Alert.alert('Failed', 'Data Already Collected This Session')
+      console.log('Failed to collect device data');
+      Alert.alert('Failed', 'Failed to collect device data');
       return { success: false, message: 'Failed to collect device data' };
     }
 
     const success = await sendDataToEndpoint(data);
     if (success) {
       await AsyncStorage.setItem('sessionFlag', 'true');
-      return { success: true, message: 'Data sent successfully' ,deviceData:data };
+      const startTime = new Date().getTime();
+      await AsyncStorage.setItem('sessionStartTime', startTime.toString());
+      return { success: true, message: 'Data sent successfully', deviceData: data };
     } else {
-      return { success: false, message: 'Data transmission failed',deviceData:data };
+      return { success: false, message: 'Data transmission failed', deviceData: data };
     }
   } catch (error) {
     console.log('Data collection and transmission error:', error);
@@ -57,5 +59,4 @@ const webServiceHandler = async (data) => {
   }
 };
 
-export default webServiceHandler
-
+export default webServiceHandler;
