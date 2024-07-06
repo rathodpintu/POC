@@ -9,7 +9,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 Installation
 Clone the repository and install dependencies:
 
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/rathodpintu/POC.git
 cd your-repo
 npm install
 # or
