@@ -10,8 +10,11 @@ Installation
 Clone the repository and install dependencies:
 
 git clone https://github.com/rathodpintu/POC.git
+
 cd your-repo
+
 npm install
+
 # or
 yarn install
 
