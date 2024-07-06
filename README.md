@@ -4,12 +4,17 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
+# Importent info: Session expires within 10 minutes.
+
 Installation
 Clone the repository and install dependencies:
 
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/rathodpintu/POC.git
+
 cd your-repo
+
 npm install
+
 # or
 yarn install
 
