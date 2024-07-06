@@ -66,6 +66,7 @@ const HomeScreen = () => {
     }
   }, [])
 
+
   const confirmFetchData = () => {
     Alert.alert(
       'Confirm Fetch',
